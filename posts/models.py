@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
 
 User = get_user_model()
 
@@ -14,11 +14,16 @@ class Group(models.Model):
 
 
 class Post(models.Model):
-    text = models.TextField(help_text="Agrrrhhhh. Just text. Comeon, write something")
-    pub_date = models.DateTimeField("date published", auto_now_add=True)
+    text = models.TextField(help_text='Agrrrhhhh. Just text. Comeon, write something')
+    pub_date = models.DateTimeField('date published', auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE,)
     group = models.ForeignKey(
-        Group, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Group", related_name="posts",)
+        Group, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Group',
+        related_name='posts',
+        )
 
     def __str__(self):
         return self.text[0:100]
+
+    class Meta:
+        ordering = ['-pub_date']
