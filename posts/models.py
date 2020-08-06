@@ -20,10 +20,11 @@ class Post(models.Model):
     group = models.ForeignKey(
         Group, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Group',
         related_name='posts',
-        )
+    )
+
+    class Meta:
+        ordering = ['-pub_date']
 
     def __str__(self):
         return self.text[0:100]
 
-    class Meta:
-        ordering = ['-pub_date']
